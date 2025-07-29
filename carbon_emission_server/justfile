@@ -1,0 +1,10 @@
+default:
+    just --list
+
+
+# Run the server in swc mode
+run_server:
+    nest start -b swc
+
+watch_server:
+    nest start -b swc -w --type-check
