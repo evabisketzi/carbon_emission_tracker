@@ -1,0 +1,9 @@
+# Justfile
+set dotenv-load
+#$root = "/home/eva/Workspace/Carbon_Emission_Tracker/schema"
+
+default:
+    just --list
+
+migrate:
+    flyway -url=jdbc:postgresql://localhost:5432/carbon_emission_tracker -user=admin -password=S@mmy1518! -locations=filesystem:migrations migrate
