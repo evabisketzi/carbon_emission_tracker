@@ -8,3 +8,9 @@ run_server:
 
 watch_server:
     nest start -b swc -w --type-check
+
+lint:
+    pnpm run lint 
+
+prettier:
+    pnpm exec prettier . --write

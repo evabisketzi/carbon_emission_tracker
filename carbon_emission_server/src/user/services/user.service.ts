@@ -1,10 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
-import { CreateUserProps, UserProps } from './user.domain';
-import {  UUID } from 'crypto';
-import { compare, hash } from 'bcrypt';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { User } from "../entities/user.entity";
+import { CreateUserProps, UserProps } from "./user.domain";
+import { UUID } from "crypto";
+import { compare, hash } from "bcrypt";
 
 @Injectable()
 export class UserService {
@@ -21,10 +21,12 @@ export class UserService {
     return this.usersRepository.findOneBy({ id });
   }
 
-  async validateUsernamePassword(username: string, password: string): Promise<UserProps> {
-    
+  async validateUsernamePassword(
+    username: string,
+    password: string,
+  ): Promise<UserProps> {
     const user = await this.usersRepository.findOneBy({ username });
-    
+
     if (user == null) {
       throw new UnauthorizedException();
     }
@@ -43,13 +45,13 @@ export class UserService {
   }
 
   async saveUser(userData: CreateUserProps): Promise<UUID> {
-    const hashedPass = await hash(userData.password,10);
+    const hashedPass = await hash(userData.password, 10);
     const user = this.usersRepository.create({
       ...userData,
       password: hashedPass,
     });
 
-    const savedUser =  await this.usersRepository.save(user);
-    return savedUser.id
+    const savedUser = await this.usersRepository.save(user);
+    return savedUser.id;
   }
 }

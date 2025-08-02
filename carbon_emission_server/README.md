@@ -1,10 +1,10 @@
 ## Stack description
+
 | Component  | Tool               |
 | ---------- | ------------------ |
 | Web server | NestJS + TypeORM   |
 | Database   | PostgreSQL         |
 | Migrations | Flyway (SQL-based) |
-
 
 ## Description
 
