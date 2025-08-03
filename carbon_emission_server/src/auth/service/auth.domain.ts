@@ -1,8 +1,8 @@
 import { UUID } from "crypto";
 
 export type AuthToken = {
-    accessToken: Promise<string>;
-    refreshToken: Promise<string>;
+    accessToken: string;
+    refreshToken: string;
 };
 
 export type TokenPayload = {

@@ -16,14 +16,14 @@ export class RefreshTokenService {
         private configService: ConfigService
     ) {}
 
-    async createRefreshToken(userName: string, userId: UUID): Promise<string> {
+    createRefreshToken(userName: string, userId: UUID): string {
         const duration = this.configService.get<number>("REFRESH_TOKEN_EXPIRY");
 
         if (duration === undefined) {
             throw new Error("Missing REFRESH_TOKEN_EXPIRY config value");
         }
 
-        const refreshToken = await this.jwtService.signAsync(
+        const refreshToken = this.jwtService.sign(
             {
                 sub: userId,
                 userName

@@ -32,7 +32,9 @@ export class AuthService {
 
         const authToken = {
             refreshToken: refreshToken,
-            accessToken: this.jwtService.signAsync(payload)
+            accessToken: this.jwtService.sign(payload, {
+                expiresIn: this.configService.get<number>("JWT_EXPIRY")
+            })
         };
 
         return authToken;

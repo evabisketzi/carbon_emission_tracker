@@ -11,15 +11,6 @@ export class LoginInputDTO {
     password!: string;
 }
 
-export class LoginOutputDTO {
-    @IsNotEmpty()
-    @IsString()
-    refreshToken!: string;
-
-    @IsNotEmpty()
-    @IsString()
-    accessToken!: string;
-}
 
 export class SignupInputDTO {
     @IsNotEmpty()
