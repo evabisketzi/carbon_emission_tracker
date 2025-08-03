@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { RefreshToken } from "../entities/token.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { TokenPayload } from "./auth.domain";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { UUID } from "crypto";
@@ -16,7 +15,7 @@ export class RefreshTokenService {
         private configService: ConfigService
     ) {}
 
-    createRefreshToken(userName: string, userId: UUID): string {
+    async createRefreshToken(userName: string, userId: UUID): Promise<string> {
         const duration = this.configService.get<number>("REFRESH_TOKEN_EXPIRY");
 
         if (duration === undefined) {
@@ -42,7 +41,11 @@ export class RefreshTokenService {
             expires: expiresAt
         });
 
-        this.tokenRepository.save(tokenRow);
+        try {
+            await this.tokenRepository.save(tokenRow);
+        } catch {
+            throw new Error("Error while creating the refresh token");
+        }
 
         return refreshToken;
     }

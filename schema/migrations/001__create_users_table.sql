@@ -6,7 +6,7 @@ CREATE TABLE users (
     email varchar(40) NOT NULL,
     username varchar(40) NOT NULL,
     first_name varchar(40) NOT NULL,
-    last_email varchar(40) NOT NULL,
+    last_name varchar(40) NOT NULL,
     hashed_password TEXT NOT NULL,
     CONSTRAINT un_user_name UNIQUE(email)
 );

@@ -1,9 +1,12 @@
-import { Body, Controller, Post } from "@nestjs/common";
-import { AuthService } from "../service/auth.service";
 import {
-    LoginInputDTO,
-    SignupInputDTO
-} from "../dtos/auth.dtos";
+    Body,
+    Controller,
+    HttpException,
+    HttpStatus,
+    Post
+} from "@nestjs/common";
+import { AuthService } from "../service/auth.service";
+import { LoginInputDTO, SignupInputDTO } from "../dtos/auth.dtos";
 import { AuthToken } from "../service/auth.domain";
 import { UserService } from "src/user/services/user.service";
 
@@ -16,7 +19,7 @@ export class AuthController {
 
     @Post("login")
     async login(@Body() loginInput: LoginInputDTO): Promise<AuthToken> {
-        return  this.authService.signIn(
+        return this.authService.signIn(
             loginInput.username,
             loginInput.password
         );
@@ -24,6 +27,13 @@ export class AuthController {
 
     @Post("signup")
     async signup(@Body() signupInput: SignupInputDTO) {
-        this.userService.saveUser(signupInput);
+        try {
+            await this.userService.saveUser(signupInput);
+        } catch {
+            throw new HttpException(
+                "Error while creating the user",
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 }

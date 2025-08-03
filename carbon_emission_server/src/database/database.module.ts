@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { Pool } from "pg";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigService } from "@nestjs/config";
 
@@ -25,6 +24,7 @@ import { ConfigService } from "@nestjs/config";
 export class DatabaseModule {}
 
 // For future reference this is a way to have a dbProvider without typeORM
+// import { Pool } from "pg";
 // const dbProvider = {
 //   provide: PG_CONNECTION,
 //   useValue: new Pool({

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { UserService } from "src/user/services/user.service";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
@@ -25,7 +25,7 @@ export class AuthService {
             sub: user.id
         };
 
-        const refreshToken = this.tokenServices.createRefreshToken(
+        const refreshToken = await this.tokenServices.createRefreshToken(
             username,
             user.id
         );

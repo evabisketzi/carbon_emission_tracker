@@ -31,7 +31,7 @@ export class UserService {
             throw new UnauthorizedException();
         }
 
-        const match = compare(user.password, password);
+        const match = await compare(user.password, password);
 
         if (!match) {
             throw new UnauthorizedException();

@@ -11,7 +11,6 @@ export class LoginInputDTO {
     password!: string;
 }
 
-
 export class SignupInputDTO {
     @IsNotEmpty()
     @IsString()
