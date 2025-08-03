@@ -4,13 +4,13 @@ import { AppService } from "./app.service";
 import { ConfigModule } from "@nestjs/config";
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      envFilePath: ["carbon_emission_server/.env"],
-      isGlobal: true,
-    }),
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            envFilePath: ["carbon_emission_server/.env"],
+            isGlobal: true
+        })
+    ],
+    controllers: [AppController],
+    providers: [AppService]
 })
 export class AppModule {}

@@ -1,8 +1,8 @@
 import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  UnauthorizedException,
+    CanActivate,
+    ExecutionContext,
+    Injectable,
+    UnauthorizedException
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
@@ -13,31 +13,32 @@ import { TokenPayload } from "./auth.domain";
 // by the route handler or not. they are responsible for the authorization.
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(
-    private jwtService: JwtService,
-    private configService: ConfigService,
-  ) {}
+    constructor(
+        private jwtService: JwtService,
+        private configService: ConfigService
+    ) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
+    async canActivate(context: ExecutionContext): Promise<boolean> {
+        const request = context.switchToHttp().getRequest();
+        const token = this.extractTokenFromHeader(request);
 
-    if (!token) {
-      throw new UnauthorizedException();
+        if (!token) {
+            throw new UnauthorizedException();
+        }
+        try {
+            const payload: TokenPayload =
+                await this.jwtService.verifyAsync(token);
+            // 💡 We're assigning the payload to the request object here
+            // so that we can access it in our route handlers
+            request["user"] = payload;
+        } catch {
+            throw new UnauthorizedException();
+        }
+        return true;
     }
-    try {
-      const payload: TokenPayload = await this.jwtService.verifyAsync(token);
-      // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
-      request["user"] = payload;
-    } catch {
-      throw new UnauthorizedException();
-    }
-    return true;
-  }
 
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(" ") ?? [];
-    return type === "Bearer" ? token : undefined;
-  }
+    private extractTokenFromHeader(request: Request): string | undefined {
+        const [type, token] = request.headers.authorization?.split(" ") ?? [];
+        return type === "Bearer" ? token : undefined;
+    }
 }

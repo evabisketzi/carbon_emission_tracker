@@ -6,19 +6,19 @@ import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./service/auth.guard";
 
 @Module({
-  imports: [
-    UserModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        global: true,
-        secret: configService.get<string>("JWT_SECRET"),
-      }),
-      inject: [ConfigService],
-    }),
-  ],
-  providers: [AuthService],
-  controllers: [],
-  exports: [AuthService, AuthGuard],
+    imports: [
+        UserModule,
+        JwtModule.registerAsync({
+            imports: [ConfigModule],
+            useFactory: (configService: ConfigService) => ({
+                global: true,
+                secret: configService.get<string>("JWT_SECRET")
+            }),
+            inject: [ConfigService]
+        })
+    ],
+    providers: [AuthService],
+    controllers: [],
+    exports: [AuthService, AuthGuard]
 })
 export class AuthModule {}

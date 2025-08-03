@@ -8,50 +8,50 @@ import { compare, hash } from "bcrypt";
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-  ) {}
+    constructor(
+        @InjectRepository(User)
+        private usersRepository: Repository<User>
+    ) {}
 
-  findAll(): Promise<UserProps[]> {
-    return this.usersRepository.find();
-  }
-
-  findById(id: UUID): Promise<UserProps | null> {
-    return this.usersRepository.findOneBy({ id });
-  }
-
-  async validateUsernamePassword(
-    username: string,
-    password: string,
-  ): Promise<UserProps> {
-    const user = await this.usersRepository.findOneBy({ username });
-
-    if (user == null) {
-      throw new UnauthorizedException();
+    findAll(): Promise<UserProps[]> {
+        return this.usersRepository.find();
     }
 
-    const match = compare(user.password, password);
-
-    if (!match) {
-      throw new UnauthorizedException();
+    findById(id: UUID): Promise<UserProps | null> {
+        return this.usersRepository.findOneBy({ id });
     }
 
-    return user;
-  }
+    async validateUsernamePassword(
+        username: string,
+        password: string
+    ): Promise<UserProps> {
+        const user = await this.usersRepository.findOneBy({ username });
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
-  }
+        if (user == null) {
+            throw new UnauthorizedException();
+        }
 
-  async saveUser(userData: CreateUserProps): Promise<UUID> {
-    const hashedPass = await hash(userData.password, 10);
-    const user = this.usersRepository.create({
-      ...userData,
-      password: hashedPass,
-    });
+        const match = compare(user.password, password);
 
-    const savedUser = await this.usersRepository.save(user);
-    return savedUser.id;
-  }
+        if (!match) {
+            throw new UnauthorizedException();
+        }
+
+        return user;
+    }
+
+    async remove(id: number): Promise<void> {
+        await this.usersRepository.delete(id);
+    }
+
+    async saveUser(userData: CreateUserProps): Promise<UUID> {
+        const hashedPass = await hash(userData.password, 10);
+        const user = this.usersRepository.create({
+            ...userData,
+            password: hashedPass
+        });
+
+        const savedUser = await this.usersRepository.save(user);
+        return savedUser.id;
+    }
 }
