@@ -32,19 +32,18 @@ export class RefreshTokenService {
             }
         );
 
-        const expiresAt = new Date(Date.now() + duration * 100);
+        const expiresAt = new Date(Date.now() + duration * 1000);
 
         const tokenRow = this.tokenRepository.create({
             token: refreshToken,
-            created: new Date(),
             userId: userId,
             expires: expiresAt
         });
 
         try {
             await this.tokenRepository.save(tokenRow);
-        } catch {
-            throw new Error("Error while creating the refresh token");
+        } catch (error) {
+            throw new Error(`Error while creating the refresh token: ${error}`);
         }
 
         return refreshToken;

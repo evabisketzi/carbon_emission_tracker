@@ -9,6 +9,7 @@ import { AuthService } from "../service/auth.service";
 import { LoginInputDTO, SignupInputDTO } from "../dtos/auth.dtos";
 import { AuthToken } from "../service/auth.domain";
 import { UserService } from "src/user/services/user.service";
+import { UUID } from "node:crypto";
 
 @Controller("auth")
 export class AuthController {
@@ -26,12 +27,13 @@ export class AuthController {
     }
 
     @Post("signup")
-    async signup(@Body() signupInput: SignupInputDTO) {
+    async signup(@Body() signupInput: SignupInputDTO): Promise<UUID> {
         try {
-            await this.userService.saveUser(signupInput);
-        } catch {
+            const user = await this.userService.saveUser(signupInput);
+            return user;
+        } catch (error) {
             throw new HttpException(
-                "Error while creating the user",
+                `Error while creating the user ${error}`,
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
         }

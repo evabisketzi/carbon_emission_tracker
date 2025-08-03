@@ -31,11 +31,11 @@ export class UserService {
             throw new UnauthorizedException();
         }
 
-        const match = await compare(user.password, password);
-
-        if (!match) {
-            throw new UnauthorizedException();
-        }
+        compare(user.password, password, (err) => {
+            if (err) {
+                throw err;
+            }
+        });
 
         return user;
     }

@@ -4,9 +4,14 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { UserModule } from "src/user/user.module";
 import { AuthService } from "./service/auth.service";
 import { AuthGuard } from "./service/auth.guard";
+import { RefreshTokenService } from "./service/token.service";
+import { RefreshToken } from "./entities/token.entity";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { AuthController } from "./controllers/auth.controller";
 
 @Module({
     imports: [
+        TypeOrmModule.forFeature([RefreshToken]),
         UserModule,
         JwtModule.registerAsync({
             imports: [ConfigModule],
@@ -17,8 +22,7 @@ import { AuthGuard } from "./service/auth.guard";
             inject: [ConfigService]
         })
     ],
-    providers: [AuthService],
-    controllers: [],
-    exports: [AuthService, AuthGuard]
+    providers: [AuthService, AuthGuard, RefreshTokenService],
+    controllers: [AuthController]
 })
 export class AuthModule {}

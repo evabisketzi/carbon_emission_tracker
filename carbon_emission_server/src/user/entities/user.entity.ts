@@ -18,18 +18,19 @@ export class User {
     @Column({ name: "email", type: "varchar", nullable: false })
     email!: string;
 
-    @Column({ name: "password", type: "varchar", nullable: false })
+    @Column({ name: "hashed_password", type: "varchar", nullable: false })
     password!: string;
 
     @Column({ name: "created_at", type: "timestamp", nullable: false })
     created!: Date;
 
-    @Column({ name: "updated_at", type: "timestamp", nullable: true })
+    @Column({ name: "updated_at", type: "timestamp", nullable: false })
     updated!: Date;
 
     @BeforeInsert()
     generateId() {
         this.id = crypto.randomUUID();
         this.created = new Date();
+        this.updated = this.created;
     }
 }

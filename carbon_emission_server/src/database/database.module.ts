@@ -9,10 +9,13 @@ import { ConfigService } from "@nestjs/config";
             useFactory: (configService: ConfigService) => ({
                 type: "postgres",
                 host: configService.get<string>("DB_HOST"),
-                port: configService.get<number>("DB_PORT"),
-                username: configService.get<string>("DB_USER"),
-                password: configService.get<string>("DB_PASS"),
-                database: configService.get<string>("DB_NAME"),
+                port: configService.get<number>("DB_PORT", 5432),
+                username: configService.get<string>("DB_USER", "admin"),
+                password: configService.get<string>("DB_PASS", "password"),
+                database: configService.get<string>(
+                    "DB_NAME",
+                    "carbon_emission_tracker"
+                ),
                 entities: [__dirname + "/../**/*.entity.{ts,js}"],
                 autoLoadEntities: true,
                 synchronize: false,
@@ -22,22 +25,3 @@ import { ConfigService } from "@nestjs/config";
     ]
 })
 export class DatabaseModule {}
-
-// For future reference this is a way to have a dbProvider without typeORM
-// import { Pool } from "pg";
-// const dbProvider = {
-//   provide: PG_CONNECTION,
-//   useValue: new Pool({
-//     user: 'postgres',
-//     host: 'localhost',
-//     database: 'somedb',
-//     password: 'meh',
-//     port: 5432,
-//   }),
-// };
-
-// @Module({
-//   providers: [dbProvider],
-//   exports: [dbProvider],
-// })
-// export class DbModule {}
