@@ -11,7 +11,7 @@ import { lastValueFrom, map } from "rxjs";
 import { TravelUrl } from "./constants";
 
 @Injectable()
-export class CarbonEmissionFetcherService {
+export class CarbonApiClient {
     constructor(private httpService: HttpService) {}
 
     async fetchEmissionsForTravel(data: TripDetails): Promise<number> {

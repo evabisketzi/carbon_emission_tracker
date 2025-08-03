@@ -17,8 +17,8 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
             })
         })
     ],
-    providers: [CarbonEmissionFetcher],
+    providers: [CarbonApiClient],
     controllers: [],
     exports: []
 })
-export class CarbonEmissionFetcher {}
+export class CarbonApiClient {}
