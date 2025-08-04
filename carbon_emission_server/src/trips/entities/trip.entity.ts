@@ -1,28 +1,42 @@
 import { UUID } from "crypto";
-import { FuelType, TransportType, VehicleType } from "src/api_client/services/carbon.domain";
+import {
+    FuelType,
+    TransportType,
+    VehicleType
+} from "src/api_client/services/carbon.domain";
 import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity({name: "trips"})
+@Entity({ name: "trips" })
 export class Trip {
-    @PrimaryColumn({name: "id"})
+    @PrimaryColumn({ name: "id" })
     id!: UUID;
 
-    @Column({name: "transport_type", type: "enum", enum: TransportType, nullable: false })
-    transportType!: TransportType
+    @Column({
+        name: "transport_type",
+        type: "enum",
+        enum: TransportType,
+        nullable: false
+    })
+    transportType!: TransportType;
 
-    @Column({name: "vehicle", type: "enum", enum: VehicleType, nullable: false })
+    @Column({
+        name: "vehicle",
+        type: "enum",
+        enum: VehicleType,
+        nullable: false
+    })
     vehicle!: VehicleType;
 
-    @Column({name: "fuel", type: "enum", enum: FuelType, nullable: false })
+    @Column({ name: "fuel", type: "enum", enum: FuelType, nullable: false })
     fuel!: FuelType;
 
-    @Column({name: "origin", nullable: false })
+    @Column({ name: "origin", nullable: false })
     origin!: string;
 
-    @Column({name: "destination", nullable: false })
+    @Column({ name: "destination", nullable: false })
     destination!: string;
 
-    @Column({name: "emissions", nullable: false })
+    @Column({ name: "emissions", nullable: false })
     emissions!: number;
 
     @Column({ name: "created_at", type: "timestamp", nullable: false })
@@ -31,7 +45,7 @@ export class Trip {
     @Column({ name: "updated_at", type: "timestamp", nullable: false })
     updated!: Date;
 
-    @Column({name: "people", type: "int", nullable: false})
+    @Column({ name: "people", type: "int", nullable: false })
     people!: number;
 
     @Column({ name: "user_id", type: "timestamp", nullable: false })

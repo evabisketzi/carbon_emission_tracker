@@ -12,22 +12,22 @@ export class TripService {
     constructor(
         @InjectRepository(Trip)
         private tripRepository: Repository<Trip>,
-        private apiClient: CarbonApiClient,
-    ){}
+        private apiClient: CarbonApiClient
+    ) {}
 
     async registerTrip(props: {
-        tripDetails: TripDetails,
-        userId: UUID
+        tripDetails: TripDetails;
+        userId: UUID;
     }): Promise<TripLog> {
-        const {tripDetails, userId} = props;
-        const emissions = await this.apiClient.fetchEmissionsForTravel(tripDetails);
+        const { tripDetails, userId } = props;
+        const emissions =
+            await this.apiClient.fetchEmissionsForTravel(tripDetails);
 
         const tripRow = this.tripRepository.create({
             ...tripDetails,
             emissions,
-            userId,
+            userId
         });
-
 
         try {
             await this.tripRepository.save(tripRow);
@@ -39,28 +39,36 @@ export class TripService {
             id: tripRow.id,
             ...tripDetails,
             total_emissions: emissions,
-            emissions_pp: emissions/tripDetails.people,
-        }
+            emissions_pp: emissions / tripDetails.people
+        };
     }
 
     async findAllTripLogsForUser(userId: UUID): Promise<TripLog[]> {
-        const trips = await this.tripRepository.findBy({userId});        
-        return  trips.map((entry) => {
-            const tripLog: TripLog =  {
-            ...entry,
-            total_emissions: entry.emissions,
-            emissions_pp: entry.emissions/entry.people
-        }
-        return tripLog;});
+        const trips = await this.tripRepository.findBy({ userId });
+        return trips.map((entry) => {
+            const tripLog: TripLog = {
+                ...entry,
+                total_emissions: entry.emissions,
+                emissions_pp: entry.emissions / entry.people
+            };
+            return tripLog;
+        });
     }
 
-    async findTripLogForUser(userId: UUID, tripId: UUID): Promise<TripLog | null> {
-        const trip = await this.tripRepository.findOneBy({userId, id: tripId}); 
-        return ( trip !== null ? {
-            ...trip,
-            total_emissions: trip.emissions,
-            emissions_pp: trip.emissions/trip.people
-        } : null)
-       
+    async findTripLogForUser(
+        userId: UUID,
+        tripId: UUID
+    ): Promise<TripLog | null> {
+        const trip = await this.tripRepository.findOneBy({
+            userId,
+            id: tripId
+        });
+        return trip !== null
+            ? {
+                  ...trip,
+                  total_emissions: trip.emissions,
+                  emissions_pp: trip.emissions / trip.people
+              }
+            : null;
     }
 }

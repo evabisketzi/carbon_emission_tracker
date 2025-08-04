@@ -5,10 +5,6 @@ import { Trip } from "./entities/trip.entity";
 import { AuthModule } from "src/auth/auth.module";
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([Trip]),
-        CarbonApiModule,
-        AuthModule
-    ]
+    imports: [TypeOrmModule.forFeature([Trip]), CarbonApiModule, AuthModule]
 })
-export class TripModule {};
+export class TripModule {}

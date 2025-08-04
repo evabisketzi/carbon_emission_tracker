@@ -5,4 +5,4 @@ export type TripLog = TripDetails & {
     id: UUID;
     total_emissions: number;
     emissions_pp: number;
-}
+};

@@ -1,5 +1,9 @@
-import { IsEmail, IsEmpty, IsInt, IsNotEmpty, IsPositive, IsString, MaxLength } from "class-validator";
-import { FuelType, TransportType, VehicleType } from "src/api_client/services/carbon.domain";
+import { IsInt, IsNotEmpty, IsPositive, IsString } from "class-validator";
+import {
+    FuelType,
+    TransportType,
+    VehicleType
+} from "src/api_client/services/carbon.domain";
 
 export class CreateTripDto {
     @IsNotEmpty()

@@ -15,7 +15,7 @@ import { PassportModule } from "@nestjs/passport";
     imports: [
         TypeOrmModule.forFeature([RefreshToken]),
         UserModule,
-        PassportModule.register({ defaultStrategy: 'jwt' }),
+        PassportModule.register({ defaultStrategy: "jwt" }),
         JwtModule.registerAsync({
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => ({

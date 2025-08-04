@@ -6,7 +6,7 @@ export interface UserToken {
 }
 
 declare namespace Express {
-  interface Request {
-    user?: UserToken;
-  }
+    interface Request {
+        user?: UserToken;
+    }
 }

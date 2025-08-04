@@ -3,8 +3,8 @@ export enum TransportType {
     "driving",
     "flying",
     "public-transport",
-    "transfer",
-};
+    "transfer"
+}
 
 export enum VehicleType {
     "bus",
@@ -21,8 +21,8 @@ export enum VehicleType {
     "tram",
     "subway",
     "train",
-    "transfer",
-};
+    "transfer"
+}
 
 export enum FuelType {
     "fame",
@@ -36,8 +36,8 @@ export enum FuelType {
     "gasoline",
     "ethanol",
     "bio-fuel",
-    "jetfuel",
-};
+    "jetfuel"
+}
 
 export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
     [VehicleType.bus]: [
