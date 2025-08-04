@@ -1,40 +1,7 @@
 -- +goose Up
-CREATE TYPE transport_type_enum AS ENUM ( "digital",
-    "driving",
-    "flying",
-    "public-transport",
-    "transfer"
-);
-CREATE TYPE vehicle_type_enum AS ENUM ( "bus",
-    "motorhome",
-    "minivan",
-    "car-large",
-    "car-small",
-    "car",
-    "flight-charter-economy-premium",
-    "flight-regular-business",
-    "flight-regular-economy-premium",
-    "flight-charter-economy",
-    "flight-regular-economy",
-    "tram",
-    "subway",
-    "train",
-    "transfer"
-);
-CREATE TYPE fuel_type_enum AS ENUM (
-    "fame",
-    "bio-diesel",
-    "ferrydiesel",
-    "diesel",
-    "bio-gas",
-    "natural-gas",
-    "fossil-gas",
-    "electricity",
-    "gasoline",
-    "ethanol",
-    "bio-fuel",
-    "jetfuel",
-);
+CREATE TYPE transport_type_enum AS ENUM ( 'digital', 'driving', 'flying', 'public-transport', 'transfer');
+CREATE TYPE vehicle_type_enum AS ENUM ('bus', 'motorhome', 'minivan', 'car-large', 'car-small', 'car', 'flight-charter-economy-premium', 'flight-regular-business', 'flight-regular-economy-premium', 'flight-charter-economy', 'flight-regular-economy', 'tram', 'subway', 'train', 'transfer');
+CREATE TYPE fuel_type_enum AS ENUM ('fame', 'bio-diesel', 'ferrydiesel', 'diesel', 'bio-gas', 'natural-gas', 'fossil-gas', 'electricity', 'gasoline', 'ethanol', 'bio-fuel', 'jetfuel');
 
 CREATE TABLE trips (
     id UUID PRIMARY KEY,
