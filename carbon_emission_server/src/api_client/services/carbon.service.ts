@@ -5,7 +5,8 @@ import {
     Co2eResponse,
     TripTransportBody,
     VehicleFuelMap,
-    TripBody
+    TripBody,
+    VehicleType
 } from "./carbon.domain";
 import { lastValueFrom, map } from "rxjs";
 import { TravelUrl } from "./constants";
@@ -63,7 +64,12 @@ export class CarbonApiClient {
         const vehicleType = data.vehicle;
         const fuelType = data.fuel;
 
-        if (!VehicleFuelMap[vehicleType].includes(fuelType)) {
+        const fuelsForVehicle = VehicleFuelMap.get(vehicleType);
+        if (fuelsForVehicle === undefined) {
+            throw new Error("Vehicle does not exist in our Vehicle-Fuel map");
+        }
+
+        if (!fuelsForVehicle.includes(fuelType)) {
             throw new Error(
                 `Invalid fuel type: ${vehicleType} does not support ${fuelType}`
             );

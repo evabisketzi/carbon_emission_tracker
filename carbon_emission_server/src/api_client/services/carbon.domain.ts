@@ -7,46 +7,46 @@ export enum TransportType {
 }
 
 export enum VehicleType {
-    "bus",
-    "motorhome",
-    "minivan",
-    "car-large",
-    "car-small",
-    "car",
-    "flight-charter-economy-premium",
-    "flight-regular-business",
-    "flight-regular-economy-premium",
-    "flight-charter-economy",
-    "flight-regular-economy",
-    "tram",
-    "subway",
-    "train",
-    "transfer"
+    bus = "bus",
+    motorhome = "motorhome",
+    minivan = "minivan",
+    "car-large" = "car-large",
+    "car-small" = "car-small",
+    car = "car",
+    "flight-charter-economy-premium" = "flight-charter-economy-premium",
+    "flight-regular-business" = "flight-regular-business",
+    "flight-regular-economy-premium" = "flight-regular-economy-premium",
+    "flight-charter-economy" = "flight-charter-economy",
+    "flight-regular-economy" = "flight-regular-economy",
+    tram = "tram",
+    subway = "subway",
+    train = "train",
+    transfer = "transfer"
 }
 
 export enum FuelType {
-    "fame",
-    "bio-diesel",
-    "ferrydiesel",
-    "diesel",
-    "bio-gas",
-    "natural-gas",
-    "fossil-gas",
-    "electricity",
-    "gasoline",
-    "ethanol",
-    "bio-fuel",
-    "jetfuel"
+    fame = "fame",
+    "bio-diesel" = "bio-diesel",
+    "ferrydiesel" = "ferrydiesel",
+    "diesel" = "diesel",
+    "bio-gas" = "bio-gas",
+    "natural-gas" = "natural-gas",
+    "fossil-gas" = "fossil-gas",
+    "electricity" = "electricity",
+    "gasoline" = "gasoline",
+    "ethanol" = "ethanol",
+    "bio-fuel" = "bio-fuel",
+    "jetfuel" = "jetfuel"
 }
 
-export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
-    [VehicleType.bus]: [
+export const VehicleFuelMap: Map<VehicleType, Array<FuelType>> = new Map([
+    [VehicleType.bus, [
         FuelType.fame,
         FuelType["bio-diesel"],
         FuelType.ferrydiesel,
         FuelType.diesel
-    ],
-    [VehicleType.car]: [
+    ]],
+    [VehicleType.car, [
         FuelType["bio-gas"],
         FuelType["natural-gas"],
         FuelType["fossil-gas"],
@@ -56,8 +56,8 @@ export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
         FuelType.ethanol,
         FuelType["bio-diesel"],
         FuelType.ferrydiesel
-    ],
-    [VehicleType["car-large"]]: [
+    ]],
+    [VehicleType["car-large"], [
         FuelType.electricity,
         FuelType["fossil-gas"],
         FuelType["natural-gas"],
@@ -67,8 +67,8 @@ export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
         FuelType.diesel,
         FuelType.gasoline,
         FuelType.ferrydiesel
-    ],
-    [VehicleType["car-small"]]: [
+    ]],
+    [VehicleType["car-small"], [
         FuelType.ferrydiesel,
         FuelType["natural-gas"],
         FuelType["bio-gas"],
@@ -78,28 +78,28 @@ export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
         FuelType.electricity,
         FuelType["fossil-gas"],
         FuelType["bio-diesel"]
-    ],
-    [VehicleType["flight-charter-economy"]]: [
+    ]],
+    [VehicleType["flight-charter-economy"], [
         FuelType["bio-fuel"],
         FuelType.jetfuel
-    ],
-    [VehicleType["flight-charter-economy-premium"]]: [
+    ]],
+    [VehicleType["flight-charter-economy-premium"], [
         FuelType["bio-fuel"],
         FuelType.jetfuel
-    ],
-    [VehicleType["flight-regular-business"]]: [
+    ]],
+    [VehicleType["flight-regular-business"], [
         FuelType["bio-fuel"],
         FuelType.jetfuel
-    ],
-    [VehicleType["flight-regular-economy"]]: [
+    ]],
+    [VehicleType["flight-regular-economy"], [
         FuelType["bio-fuel"],
         FuelType.jetfuel
-    ],
-    [VehicleType["flight-regular-economy-premium"]]: [
+    ]],
+    [VehicleType["flight-regular-economy-premium"], [
         FuelType["bio-fuel"],
         FuelType.jetfuel
-    ],
-    [VehicleType.minivan]: [
+    ]],
+    [VehicleType.minivan, [
         FuelType.ethanol,
         FuelType["bio-gas"],
         FuelType["natural-gas"],
@@ -109,8 +109,8 @@ export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
         FuelType.gasoline,
         FuelType["bio-diesel"],
         FuelType.ferrydiesel
-    ],
-    [VehicleType.motorhome]: [
+    ]],
+    [VehicleType.motorhome, [
         FuelType.gasoline,
         FuelType.ferrydiesel,
         FuelType.electricity,
@@ -120,16 +120,16 @@ export const VehicleFuelMap: Record<VehicleType, Array<FuelType>> = {
         FuelType["bio-gas"],
         FuelType.ethanol,
         FuelType["bio-diesel"]
-    ],
-    [VehicleType.tram]: [FuelType.electricity],
-    [VehicleType.subway]: [FuelType.electricity],
-    [VehicleType.train]: [
+    ]],
+    [VehicleType.tram, [FuelType.electricity]],
+    [VehicleType.subway, [FuelType.electricity]],
+    [VehicleType.train, [
         FuelType["bio-diesel"],
         FuelType.electricity,
         FuelType.diesel
-    ],
-    [VehicleType.transfer]: [FuelType.diesel]
-};
+    ]],
+    [VehicleType.transfer, [FuelType.diesel]]
+]);
 
 export type VehicleFuelProp = {
     type: VehicleType;

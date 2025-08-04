@@ -13,7 +13,9 @@ import { CarbonApiClient } from "./services/carbon.service";
                 headers: {
                     "x-rapidapi-key": configService.get<string>("API_KEY", ""),
                     "x-rapidapi-host": configService.get<string>("HOST", ""),
-                    "Content-Type": "application/json"
+                    "Authorization": `Bearer ${configService.get<string>("API_KEY", "")}`,
+                    "Content-Type": "application/json",
+                    "Accept": 'application/json'
                 },
             }),
             inject: [ConfigService]

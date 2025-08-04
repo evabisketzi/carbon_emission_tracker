@@ -30,9 +30,11 @@ export class TripService {
         });
 
         try {
-            await this.tripRepository.save(tripRow);
+            await this.tripRepository.save(tripRow, {
+
+            });
         } catch (error) {
-            throw new Error(`Error while creating the trip entry: ${error}`);
+            throw new Error(`Creating the trip entry failed: ${error}`);
         }
 
         return {

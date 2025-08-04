@@ -8,7 +8,7 @@ import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "trips" })
 export class Trip {
-    @PrimaryGeneratedColumn({ name: "id" })
+    @PrimaryGeneratedColumn("uuid", { name: "id" })
     id!: UUID;
 
     @Column({
@@ -48,7 +48,7 @@ export class Trip {
     @Column({ name: "people", type: "int", nullable: false })
     people!: number;
 
-    @Column({ name: "user_id", type: "timestamp", nullable: false })
+    @Column({ name: "user_id", type: "uuid", nullable: false })
     userId!: UUID;
 
     @BeforeInsert()
