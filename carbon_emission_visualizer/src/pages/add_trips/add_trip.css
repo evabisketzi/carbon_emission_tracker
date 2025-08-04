@@ -1,0 +1,18 @@
+.add-trip-page {
+  margin: 20;
+  background-color: var(--my-beige);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.add-trip-page h1 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: var(--dark-blue);
+}
+
+.add-trip-page p {
+  margin-top: 15px;
+  color: var(--red);
+}
