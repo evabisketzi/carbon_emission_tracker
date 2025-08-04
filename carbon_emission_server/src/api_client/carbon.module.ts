@@ -11,15 +11,16 @@ import { CarbonApiClient } from "./services/carbon.service";
                 timeout: 5000,
                 maxRedirects: 5,
                 headers: {
-                    "x-rapidapi-key": configService.get<string>("API_KEY"),
-                    "x-rapidapi-host": configService.get<string>("HOST"),
+                    "x-rapidapi-key": configService.get<string>("API_KEY", ""),
+                    "x-rapidapi-host": configService.get<string>("HOST", ""),
                     "Content-Type": "application/json"
-                }
-            })
+                },
+            }),
+            inject: [ConfigService]
         })
     ],
     providers: [CarbonApiClient],
     controllers: [],
-    exports: []
+    exports: [CarbonApiClient]
 })
 export class CarbonApiModule {}

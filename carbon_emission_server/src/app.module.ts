@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
 import { UserModule } from "./user/user.module";
 import path from "node:path";
+import { TripModule } from "./trips/trips.module";
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import path from "node:path";
         }),
         DatabaseModule,
         UserModule,
+        TripModule,
         AuthModule
     ],
     controllers: [AppController],
