@@ -4,11 +4,11 @@ import {
     TransportType,
     VehicleType
 } from "src/api_client/services/carbon.domain";
-import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "trips" })
 export class Trip {
-    @PrimaryColumn({ name: "id" })
+    @PrimaryGeneratedColumn({ name: "id" })
     id!: UUID;
 
     @Column({
