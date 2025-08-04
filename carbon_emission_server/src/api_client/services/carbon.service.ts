@@ -31,7 +31,7 @@ export class CarbonApiClient {
         return lastValueFrom(response);
     }
 
-    transformTripPostData(data: TripDetails): TripBody {
+    private transformTripPostData(data: TripDetails): TripBody {
         const transport = this.transformTransportPostData(data);
         const requestBody: TripBody = {
             trips: [
@@ -59,7 +59,7 @@ export class CarbonApiClient {
         return requestBody;
     }
 
-    transformTransportPostData(data: TripDetails): TripTransportBody {
+    private transformTransportPostData(data: TripDetails): TripTransportBody {
         const vehicleType = data.vehicle;
         const fuelType = data.fuel;
 

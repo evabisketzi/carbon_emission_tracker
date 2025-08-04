@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UserService } from "src/user/services/user.service";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
@@ -19,6 +19,10 @@ export class AuthService {
             username,
             pass
         );
+
+        if (user === null) {
+            throw new UnauthorizedException();
+        }
 
         const payload = {
             username: user.username,

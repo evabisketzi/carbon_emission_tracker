@@ -24,11 +24,11 @@ export class UserService {
     async validateUsernamePassword(
         username: string,
         password: string
-    ): Promise<UserProps> {
+    ): Promise<UserProps | null> {
         const user = await this.usersRepository.findOneBy({ username });
 
         if (user == null) {
-            throw new UnauthorizedException();
+            return null;
         }
 
         compare(user.password, password, (err) => {

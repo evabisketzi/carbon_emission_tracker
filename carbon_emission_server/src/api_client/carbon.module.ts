@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { HttpModule } from "@nestjs/axios";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { CarbonApiClient } from "./services/carbon.service";
 
 @Module({
     imports: [
@@ -21,4 +22,4 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
     controllers: [],
     exports: []
 })
-export class CarbonApiClient {}
+export class CarbonApiModule {}
