@@ -13,9 +13,13 @@ CREATE TABLE trips (
     origin varchar(40) NOT NULL,
     destination TEXT NOT NULL,
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    people INT NOT NULL,
     emissions real NOT NULL
 );
 
 -- +goose Down
 DROP TABLE trips;
+DROP TYPE vehicle_type_enum;
+DROP TYPE transport_type_enum;
+DROP TYPE fuel_type_enum;
 
