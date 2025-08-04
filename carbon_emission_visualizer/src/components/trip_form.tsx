@@ -18,10 +18,8 @@ export function TripForm(props: TripFormProps): JSX.Element {
             people: 1,
         }
     });
-
-    const onSubmit = (data: TripDetails) => { };
   
-    return (<form onSubmit={handleSubmit(onSubmit)} className="trip-form">
+    return (<form onSubmit={handleSubmit(props.onSubmit)} className="trip-form">
       <h2>Add Trip</h2>
       <label>
         Origin:
