@@ -1,0 +1,10 @@
+default:
+    just --list
+
+
+# Run the server in swc mode
+run_vite:
+    npm run dev --
+
+lint:
+    npm run lint 

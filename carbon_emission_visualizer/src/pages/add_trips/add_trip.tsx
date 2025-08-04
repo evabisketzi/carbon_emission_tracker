@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from 'react';
+import { useState, type JSX } from 'react';
 import type { TripDetails } from '../../types/trip_types';
 import { TripForm } from '../../components/trip_form';
 import './add_trip.css'
