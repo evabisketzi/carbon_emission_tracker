@@ -5,4 +5,10 @@
   --dark-blue: #003049;
   --blue: #669bbc;
   --darker-beige: #fdeac3;
+  --table-row-beige: #e0ca9e;
+  /* Table colours */
+  --dark-green: #727D73;
+  --green: #AAB99A;
+  --pastel-green: #D0DDD0;
+  --lightest-green: #F0F0D7;
 }

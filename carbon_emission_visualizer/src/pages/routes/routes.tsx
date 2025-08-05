@@ -5,6 +5,7 @@ import { ProtectedRoute } from "../../components/protected_route";
 import { AddTripPage } from "../add_trips/add_trip";
 import { Sidebar } from "../navigation/sidebar";
 import { LoginPage } from "../login/login-page";
+import { ViewTripPage } from "../view_trips/view_trips_page";
 
 
 const Routes = () => {
@@ -52,7 +53,7 @@ const Routes = () => {
           path: "view-trips",
           element: (
             <Layout>
-              <div>View trips</div>
+              <ViewTripPage/>
             </Layout>
           ),
         },

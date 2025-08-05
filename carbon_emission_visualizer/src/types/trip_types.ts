@@ -140,6 +140,7 @@ export type TripDetails = {
     people: number;
     origin: string;
     destination: string;
+    tripDate: Date;
 };
 
 export type TripLog = TripDetails & {

@@ -1,0 +1,37 @@
+.table-container {
+  padding: 0.5rem;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--dark-green);
+  font-size: 14px;
+  background-color:  var(--lightest-green);
+}
+
+.styled-table thead {
+  background-color: var(--green);
+  color: var(--dark-red);
+}
+
+.styled-table thead tr {
+  font-weight: bold;
+  text-align: center;
+}
+.styled-table thead th {
+  font-weight: bold;
+  text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid  var(--dark-green);
+  padding: 8px 12px;
+  text-align: left;
+  color: black;
+}
+
+.styled-table tbody tr:nth-child(even) {
+  background-color: var(--pastel-green);
+}
