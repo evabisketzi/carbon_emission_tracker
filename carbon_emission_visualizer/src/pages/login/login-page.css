@@ -1,0 +1,18 @@
+.login-page {
+  background-color: var(--my-beige);
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 100%
+}
+
+.login-page h1 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: var(--dark-blue);
+}
+
+.login-page p {
+  margin-top: 15px;
+  color: var(--red);
+}
