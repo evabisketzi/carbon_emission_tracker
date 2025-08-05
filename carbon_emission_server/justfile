@@ -14,3 +14,6 @@ lint:
 
 prettier:
     pnpm exec prettier . --write
+
+test:
+    pnpm npx jest
