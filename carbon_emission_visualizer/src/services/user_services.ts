@@ -1,5 +1,4 @@
 import axios, { type AxiosResponse } from "axios";
-import { from, type Observable } from "rxjs";
 import type { LoginResponse } from "../types/auth_types";
 
 export type LoginDetails = {
@@ -8,10 +7,8 @@ export type LoginDetails = {
 }
 
 class UserProvider {
-  loginUser(loginData: LoginDetails): Observable<AxiosResponse<LoginResponse, any>> {
-    return  from(
-        axios.post<LoginResponse>('api/auth/login', loginData)
-    )
+  loginUser(loginData: LoginDetails): Promise<AxiosResponse<LoginResponse, any>> {
+    return  axios.post<LoginResponse>('api/auth/login', loginData);
   }
 
 }

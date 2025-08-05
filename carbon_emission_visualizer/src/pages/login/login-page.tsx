@@ -5,22 +5,21 @@ import './login-page.css';
 import { useNavigate } from 'react-router-dom';
 import { AddTripPath } from '../../path_constants';
 import { useAuth } from '../../services/auth_services';
-import type { LoginResponse } from '../../types/auth_types';
-import type { AxiosResponse } from 'axios';
 
 export function LoginPage(): JSX.Element {
     const { setToken } = useAuth();
     const navigate = useNavigate();
-    const [statusMessage, setStatusMessage] = useState<string | null>(null);
+    const [statusMessage, setStatusMessage] = useState<string | null>(null); 
 
-    const onSubmit = (data: LoginDetails) => {
-        userProvider.loginUser(data).subscribe({
-            next: (value: AxiosResponse<LoginResponse>) => {
-                setToken(value.data.accessToken);
-                navigate(`/app/${AddTripPath}`, {replace: true});
-            },
-            error: err => setStatusMessage(`Error: ${err.message}`),
-        });
+    const onSubmit = async (data: LoginDetails) => {
+        try {
+            const userToken = await userProvider.loginUser(data);
+            setToken(userToken.data.accessToken);
+            navigate(AddTripPath, { replace: true });
+        } catch (error) {
+            setStatusMessage(`Error: ${error.message}`);
+        }
+        
     };
 
     return (

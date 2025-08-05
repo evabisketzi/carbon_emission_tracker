@@ -5,7 +5,7 @@ import type { TripDetails } from '../types/trip_types';
 class TripsProvider {
   addTrip(data: TripDetails): Observable<void> {
     return from(
-      axios.post('api/trips', data).then(() => {})
+      axios.post('/api/trips', data).then(() => {})
     );
   }
 
