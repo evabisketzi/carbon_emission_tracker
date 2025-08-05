@@ -10,7 +10,8 @@
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import type { TripLog } from '../types/trip_types';
-import { data } from 'react-router-dom';
+import type { JSX } from 'react';
+import "./trips_chart.css"
 
 ChartJS.register(
   CategoryScale,
@@ -30,23 +31,23 @@ type Dataset = {
 export const options = {
   responsive: true,
   plugins: {
-    legend: {
-      position: 'top' as const,
+    customCanvasBackgroundColor: {
+        color: "white",
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: 'Your CO2 emissions',
     },
   },
 };
 
-
 export function TripEmissionChart({
     tripLogs,
-} :{
+}: {
     tripLogs: TripLog[],
-}) {
+}): JSX.Element {
     const dataSet: Dataset[] = tripLogs.map((log, i) => ({
+        // Dummy data - forgot to add this to the server
         date: i.toString(),
         emissions: log.emissions_pp,
     }))
@@ -64,5 +65,7 @@ export function TripEmissionChart({
         ]
     }
 
-  return <Line options={options} data={chartData} />;
+  return (<div className="chart-container">
+    <Line options={options} data={chartData} />
+  </div>);
 }
